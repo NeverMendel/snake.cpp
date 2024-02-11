@@ -7,7 +7,10 @@ RUN apt update && apt install -y \
   curl \
   git \
   unzip \
-  wget
+  wget \
+  lsb-release \
+  software-properties-common \
+  gnupg
 
 # Install Bazel
 RUN BAZEL_VERSION=7.0.2 && \
@@ -22,13 +25,12 @@ RUN BUILDIFIER_VERSION=v6.4.0 && \
     chmod +x /bin/buildifier
 
 # Install clang-format
-RUN LLVM_VERSION=18 && \
-    wget https://apt.llvm.org/llvm.sh && \
+RUN wget https://apt.llvm.org/llvm.sh && \
     chmod +x llvm.sh && \
-    ./llvm.sh ${LLVM_VERSION} && \
-    apt install -y clang-format-${LLVM_VERSION}
+    ./llvm.sh 18 && \
+    apt install -y clang-format-18
 
 # Check versions
 RUN bazel version
 RUN buildifier --version
-RUN clang-format-${LLVM_VERSION} --version
+RUN clang-format-18 --version
