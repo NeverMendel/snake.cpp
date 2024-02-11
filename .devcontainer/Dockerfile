@@ -1,7 +1,6 @@
 FROM ubuntu:22.04
 
 # Install dependencies
-
 RUN apt update && apt install -y \
   build-essential \
   curl \
@@ -11,6 +10,11 @@ RUN apt update && apt install -y \
   lsb-release \
   software-properties-common \
   gnupg
+
+# Install ncurses
+RUN apt install -y \
+    libncurses5-dev \
+    libncursesw5-dev
 
 # Install Bazel
 RUN BAZEL_VERSION=7.0.2 && \
