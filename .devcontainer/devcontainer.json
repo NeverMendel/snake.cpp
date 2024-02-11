@@ -1,0 +1,13 @@
+{
+	"name": "Bazel",
+	"dockerFile": "Dockerfile",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cpptools-extension-pack",
+				"BazelBuild.vscode-bazel",
+				"xaver.clang-format"
+			]
+		}
+	}
+}
