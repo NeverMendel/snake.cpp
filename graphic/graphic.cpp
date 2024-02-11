@@ -2,7 +2,7 @@
 
 #include <unistd.h>
 
-#include <iostream>
+#include <unordered_map>
 #include <stdexcept>
 
 #define SNAKE_PAIR 1
@@ -16,6 +16,7 @@ Graphic::Graphic(int rows, int cols) : rows(rows), cols(cols) {
   cbreak();
   noecho();
   nodelay(stdscr, TRUE);
+  keypad(stdscr, TRUE);
   curs_set(0);
 
   start_color();
@@ -61,26 +62,32 @@ void Graphic::DisplayGame(const Game& game) {
   refresh();
 }
 
+const std::unordered_map<int, Direction> kMappings = {
+  // wasd
+  {97, LEFT},
+  {115, DOWN},
+  {100, RIGHT},
+  {119, UP},
+  // arrows
+  {KEY_LEFT, LEFT},
+  {KEY_DOWN, DOWN},
+  {KEY_RIGHT, RIGHT},
+  {KEY_UP, UP},
+};
+
 Direction Graphic::GetDirection() const {
-  char ch = getch();
-  switch (ch) {
-    case 'a':
-      return LEFT;
-    case 's':
-      return DOWN;
-    case 'd':
-      return RIGHT;
-    case 'w':
-      return UP;
+  int ch = getch();
+  if(kMappings.find(ch) != kMappings.end()){
+    return kMappings.at(ch);
   }
   throw std::invalid_argument("invalid character");
 }
 
 bool Graphic::HasDirection() const {
-  char ch = getch();
+  int ch = getch();
 
   while (ch != ERR) {
-    if (ch == 'a' || ch == 's' || ch == 'd' || ch == 'w') {
+    if (kMappings.find(ch) != kMappings.end()) {
       ungetch(ch);
       return true;
     }
