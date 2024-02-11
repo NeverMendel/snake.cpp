@@ -6,7 +6,10 @@
 Game::Game() : Game(25, 25) {}
 
 Game::Game(int rows, int cols)
-    : rows(rows), cols(cols), board(rows, std::vector<CellContent>(cols)), highest_score(0) {
+    : rows(rows),
+      cols(cols),
+      board(rows, std::vector<CellContent>(cols)),
+      highest_score(0) {
   srand(time(NULL));
   Reset();
 }
@@ -49,7 +52,7 @@ bool Game::ChangeDirection(Direction direction) {
 
 void Game::Reset() {
   status = PLAYING;
-  for(auto& vec : board){
+  for (auto& vec : board) {
     std::fill(vec.begin(), vec.end(), EMPTY);
   }
   GenerateSnake();
@@ -58,13 +61,9 @@ void Game::Reset() {
 
 GameStatus Game::GetStatus() const { return status; }
 
-int Game::GetScore() const { 
-  return (snake.size() - 3) * 100;
-  }
+int Game::GetScore() const { return (snake.size() - 3) * 100; }
 
-int Game::GetHighestScore() const {
-  return highest_score;
-}
+int Game::GetHighestScore() const { return highest_score; }
 
 const Board& Game::GetBoard() const { return board; }
 

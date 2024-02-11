@@ -17,7 +17,7 @@ void Engine::Play() {
     }
     game.Move();
     graphic.DisplayGame(game);
-    if(game.GetStatus() == ENDED){
+    if (game.GetStatus() == ENDED) {
       sleep(1);
       game.Reset();
       graphic.DisplayGame(game);

@@ -2,8 +2,8 @@
 
 #include <unistd.h>
 
-#include <unordered_map>
 #include <stdexcept>
+#include <unordered_map>
 
 #define SNAKE_PAIR 1
 #define APPLE_PAIR 2
@@ -63,21 +63,21 @@ void Graphic::DisplayGame(const Game& game) {
 }
 
 const std::unordered_map<int, Direction> kMappings = {
-  // wasd
-  {97, LEFT},
-  {115, DOWN},
-  {100, RIGHT},
-  {119, UP},
-  // arrows
-  {KEY_LEFT, LEFT},
-  {KEY_DOWN, DOWN},
-  {KEY_RIGHT, RIGHT},
-  {KEY_UP, UP},
+    // wasd
+    {97, LEFT},
+    {115, DOWN},
+    {100, RIGHT},
+    {119, UP},
+    // arrows
+    {KEY_LEFT, LEFT},
+    {KEY_DOWN, DOWN},
+    {KEY_RIGHT, RIGHT},
+    {KEY_UP, UP},
 };
 
 Direction Graphic::GetDirection() const {
   int ch = getch();
-  if(kMappings.find(ch) != kMappings.end()){
+  if (kMappings.find(ch) != kMappings.end()) {
     return kMappings.at(ch);
   }
   throw std::invalid_argument("invalid character");
@@ -97,7 +97,7 @@ bool Graphic::HasDirection() const {
   return false;
 }
 
-void Graphic::CalculateGamePosition(){
+void Graphic::CalculateGamePosition() {
   bool too_small = false;
   height = rows;
   width = cols * 2;
@@ -106,12 +106,12 @@ void Graphic::CalculateGamePosition(){
     too_small = true;
     erase();
     move(0, 0);
-    printw("Current terminal size: %dx%d\nMinimum terminal size: %dx%d", COLS, LINES, width + 10,
-           height + 10);
+    printw("Current terminal size: %dx%d\nMinimum terminal size: %dx%d", COLS,
+           LINES, width + 10, height + 10);
     refresh();
     usleep(1e6);
   }
-  if(too_small) erase();
+  if (too_small) erase();
 
   starty = (LINES - height) / 2;
   startx = (COLS - width + 2) / 2;
