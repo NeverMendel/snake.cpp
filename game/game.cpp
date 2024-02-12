@@ -68,7 +68,7 @@ int Game::GetHighestScore() const { return highest_score; }
 const Board& Game::GetBoard() const { return board; }
 
 void Game::GenerateRandomApple() {
-  if (snake.size() >= rows * cols) return;
+  if (snake.size() >= (size_t)rows * cols) return;
   int row, col;
   do {
     row = rand() % rows;

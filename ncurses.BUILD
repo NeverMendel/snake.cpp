@@ -1,15 +1,24 @@
-cc_library(
-    name = "main",
-    srcs = [
-        "lib/x86_64-linux-gnu/libcurses.a",
-        "lib/x86_64-linux-gnu/libformw.a",
-        "lib/x86_64-linux-gnu/libmenuw.a",
-        "lib/x86_64-linux-gnu/libncurses.a",
-        "lib/x86_64-linux-gnu/libncurses++w.a",
-        "lib/x86_64-linux-gnu/libncursesw.a",
-        "lib/x86_64-linux-gnu/libpanel.a",
-        "lib/x86_64-linux-gnu/libpanelw.a",
-        "lib/x86_64-linux-gnu/libtinfo.a",
+load("@rules_foreign_cc//foreign_cc:defs.bzl", "configure_make")
+
+filegroup(
+    name = "ncurses_srcs",
+    srcs = glob(["**"]),
+)
+
+configure_make(
+    name = "ncurses",
+    configure_command = "configure",
+    configure_options = [
+        "--prefix $$INSTALLDIR",
+        "--with-terminfo-dirs=/usr/share/terminfo:/lib/terminfo:/usr/share/misc/terminfo",
+    ],
+    lib_source = ":ncurses_srcs",
+    out_static_libs = [
+        "libform.a",
+        "libmenu.a",
+        "libncurses++.a",
+        "libncurses.a",
+        "libpanel.a",
     ],
     visibility = ["//visibility:public"],
 )
