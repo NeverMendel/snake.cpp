@@ -6,7 +6,8 @@
 			"extensions": [
 				"ms-vscode.cpptools-extension-pack",
 				"BazelBuild.vscode-bazel",
-				"xaver.clang-format"
+				"xaver.clang-format",
+				"GitHub.vscode-github-actions"
 			]
 		}
 	}
