@@ -1,0 +1,19 @@
+name: Build snake
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+      - name: Install bazelisk
+        run: |
+          BAZELISK_VERSION=v1.19.0
+          BAZELISK_ARCH=$(arch | sed s/x86_64/amd64/ | sed s/aarch64/arm64/)
+          sudo wget -O /bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-linux-${BAZELISK_ARCH}
+          sudo chmod +x /bin/bazel
+      - name: Build
+        run: bazel build snake
