@@ -4,16 +4,32 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-11, macos-12, macos-13, macos-14, ubuntu-20.04, ubuntu-22.04]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
-      - name: Install bazelisk
+      - name: Set info
+        id: info
+        run: |
+          OS=$(uname | tr '[:upper:]' '[:lower:]')
+          ARCH=$(arch | sed s/x86_64/amd64/ | sed s/aarch64/arm64/ | sed s/i386/amd64/)
+          echo "os=${OS}" >> $GITHUB_OUTPUT
+          echo "arch=${ARCH}" >> $GITHUB_OUTPUT
+      - name: Download bazelisk
         run: |
           BAZELISK_VERSION=v1.19.0
-          BAZELISK_ARCH=$(arch | sed s/x86_64/amd64/ | sed s/aarch64/arm64/)
-          sudo wget -O /bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-linux-${BAZELISK_ARCH}
-          sudo chmod +x /bin/bazel
-      - name: Build
-        run: bazel build snake
+          wget -O bazel https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-${{ steps.info.outputs.os }}-${{ steps.info.outputs.arch }}
+          chmod +x bazel
+      - name: Build with bazel
+        run: ./bazel build snake
+      - name: Export artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: snake-${{ steps.info.outputs.os }}-${{ steps.info.outputs.arch }}-${{ matrix.os }}
+          path: bazel-bin/snake
