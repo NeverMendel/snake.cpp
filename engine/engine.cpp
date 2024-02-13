@@ -8,7 +8,7 @@ void Engine::Play() {
   graphic.DisplayGame(game);
   usleep(1e5);
   while (true) {
-    for (int i = 0; i < 75; i++) {
+    for (int i = 0; i < 80; i++) {
       if (graphic.HasDirection()) {
         Direction dir = graphic.GetDirection();
         game.ChangeDirection(dir);

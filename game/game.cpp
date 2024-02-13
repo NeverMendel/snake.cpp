@@ -79,9 +79,15 @@ void Game::GenerateRandomApple() {
 }
 
 void Game::GenerateSnake() {
-  snake = {{0, 2}, {0, 1}, {0, 0}};
-  snake_direction = RIGHT;
+  snake.clear();
+  int row = rand() % 25;
+  int col = rand() % 25;
+  snake = {{row, col}};
+  snake_direction = col > cols / 2 ? LEFT : RIGHT;
   snake_next_direction = snake_direction;
+  for (int i = 0; i < 2; i++) {
+    snake.push_back(snake.back() - snake_direction);
+  }
   for (const auto& snake_piece : snake) {
     board[snake_piece.r][snake_piece.c] = SNAKE;
   }
