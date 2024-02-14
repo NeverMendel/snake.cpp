@@ -1,5 +1,6 @@
 #include "graphic.h"
 
+#include <ncurses.h>
 #include <unistd.h>
 
 #include <stdexcept>

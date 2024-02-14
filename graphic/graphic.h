@@ -1,8 +1,6 @@
 #ifndef GRAPHIC_GRAPHIC_H
 #define GRAPHIC_GRAPHIC_H
 
-#include <ncurses.h>
-
 #include "game/game.h"
 
 class Graphic {
