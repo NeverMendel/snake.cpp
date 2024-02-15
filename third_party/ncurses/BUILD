@@ -1,10 +1,5 @@
 load("@rules_foreign_cc//foreign_cc:defs.bzl", "configure_make")
 
-filegroup(
-    name = "ncurses_srcs",
-    srcs = glob(["**"]),
-)
-
 configure_make(
     name = "ncurses",
     configure_command = "configure",
@@ -20,7 +15,7 @@ configure_make(
     env = {
         "AR": "ar",
     },
-    lib_source = ":ncurses_srcs",
+    lib_source = "@ncurses_sources//:all",
     out_static_libs = [
         "libform.a",
         "libmenu.a",

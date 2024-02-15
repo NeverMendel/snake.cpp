@@ -5,6 +5,6 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         "//game",
-        "@ncurses",
+        "//third_party/ncurses",
     ],
 )

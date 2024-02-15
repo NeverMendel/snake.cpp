@@ -13,9 +13,11 @@ load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_depende
 # https://bazelbuild.github.io/rules_foreign_cc/0.10.1/flatten.html#rules_foreign_cc_dependencies
 rules_foreign_cc_dependencies()
 
+all_content = """filegroup(name = "all", srcs = glob(["**"]), visibility = ["//visibility:public"])"""
+
 http_archive(
-    name = "ncurses",
-    build_file = "//:ncurses.BUILD",
+    name = "ncurses_sources",
+    build_file_content = all_content,
     sha256 = "39893846139518e6c2d00ac1d354d4889f0f394acd44885d70b14eaef4e23e8e",
     strip_prefix = "ncurses-6.4",
     urls = ["https://github.com/mirror/ncurses/archive/refs/tags/v6.4.tar.gz"],
