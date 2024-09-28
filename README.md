@@ -2,6 +2,8 @@
 
 Terminal based snake game written in C++ with ncurses.
 
+[![snake.gif](snake.gif)](https://asciinema.org/a/678040)
+
 ## 📝 Table of Contents
 
 - [About](#about)
