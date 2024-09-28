@@ -75,9 +75,9 @@ Cell Cell::operator-(const Direction& direction) const {
   return *this + GetOppositeDirection(direction);
 }
 
-CellDelta::CellDelta(){};
+CellDelta::CellDelta() {};
 
-CellDelta::CellDelta(int r, int c) : r(r), c(c){};
+CellDelta::CellDelta(int r, int c) : r(r), c(c) {};
 
 CellDelta::CellDelta(const CellDelta& delta) {
   r = delta.r;
