@@ -1,7 +1,6 @@
 #include "graphic.h"
 
 #include <ncurses.h>
-#include <stdlib.h>
 #include <unistd.h>
 
 #include <stdexcept>
@@ -14,7 +13,6 @@
 Graphic::Graphic() : Graphic(25, 25) {}
 
 Graphic::Graphic(int rows, int cols) : rows(rows), cols(cols) {
-  setenv("TERMINFO_DIRS", "/usr/share/terminfo:/lib/terminfo:/usr/share/misc/terminfo", false);
   initscr();
   cbreak();
   noecho();
