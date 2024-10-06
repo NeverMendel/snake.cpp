@@ -17,11 +17,11 @@ configure_make(
     },
     lib_source = "@ncurses_sources//:all",
     out_static_libs = [
-        "libform.a",
-        "libmenu.a",
-        "libncurses++.a",
-        "libncurses.a",
-        "libpanel.a",
+        "libformw.a",
+        "libmenuw.a",
+        "libncurses++w.a",
+        "libncursesw.a",
+        "libpanelw.a",
     ],
     visibility = ["//visibility:public"],
 )
