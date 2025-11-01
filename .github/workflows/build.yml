@@ -29,7 +29,7 @@ jobs:
       - name: Build with bazel
         run: ./bazel build snake
       - name: Export artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: snake-${{ steps.info.outputs.os }}-${{ steps.info.outputs.arch }}-${{ matrix.os }}
           path: bazel-bin/snake
