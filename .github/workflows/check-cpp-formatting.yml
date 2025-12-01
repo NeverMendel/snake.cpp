@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Checkout project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Install clang-format
         run: |
           wget https://apt.llvm.org/llvm.sh
